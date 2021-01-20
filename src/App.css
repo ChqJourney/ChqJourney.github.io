@@ -2,7 +2,13 @@
 
 
 
-
+.main{
+  height: 90vh;
+}
+.bottombar{
+  height: 10vh;
+  position:fixed; z-index:40; width:100%; bottom:0px;
+}
 
 .App {
   text-align: center;
