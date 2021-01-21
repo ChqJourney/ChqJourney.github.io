@@ -10,15 +10,10 @@ function App() {
     <>
     <Row>
       <Col span="24">
-      <NavBar
-          leftContent={[
-            <Icon type="allow-left" fontSize={20} />
-          ]}
-          rightContent={[
-            <Icon type="plus" fontSize={20} />,
-          ]}
-        ><div class="u-search"><Icon type="search" fontSize={14} color='#B2B5C2' style={{ marginRight: '5px' }} />搜索</div></NavBar>
-
+      <NavBar leftContent={[<Icon type="allow-left" fontSize={20} />]}
+          rightContent={[<Icon type="plus" fontSize={20} />]}>
+            <div class="u-search"><Icon type="search" fontSize={14} color='#B2B5C2' style={{ marginRight: '5px' }} />搜索</div>
+            </NavBar>
       </Col>
     </Row>
     <Row className="main">
@@ -32,12 +27,10 @@ function App() {
     </Row>
 
     <Row className="bottombar">
-          <TabBar
-            unselectedTintColor="#51565D"
+          <TabBar unselectedTintColor="#51565D"
             tintColor="#337EFF"
             barTintColor="white"
-            noRenderContent
-          >
+            noRenderContent>
             <TabBar.Item
               title="生活"
               key="life"
@@ -61,7 +54,6 @@ function App() {
             <TabBar.Item
               title="口碑"
               key="public"
-              dot
               icon={
                 <div style={{
                   width: '22px',
@@ -82,7 +74,6 @@ function App() {
             <TabBar.Item
               title="朋友"
               key="friend"
-              badge={3}
               icon={
                 <div style={{
                   width: '22px',
@@ -103,7 +94,6 @@ function App() {
             <TabBar.Item
               title="我的"
               key="my"
-              badge={22}
               icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
               selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
               selected={stat=== 'my'}

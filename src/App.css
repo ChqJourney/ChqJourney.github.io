@@ -3,10 +3,10 @@
 
 
 .main{
-  height: 90vh;
+  height: 92vh;
 }
 .bottombar{
-  height: 10vh;
+  height: 8vh;
   position:fixed; z-index:40; width:100%; bottom:0px;
 }
 
