@@ -19,7 +19,7 @@ function App() {
     <Row className="main">
       <Col span="24">
       <List>
-        <Item><Avatar/>默认圆形 </Item>
+        <Item><Avatar/>默认圆形 默认圆形 默认圆形 </Item>
         <Item><Avatar>default</Avatar>默认文字头像</Item>
         <Item><Avatar disabled>不可操作</Avatar>不可操作</Item>
       </List>
