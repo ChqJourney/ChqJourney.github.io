@@ -20,7 +20,7 @@ const initState: {
   total:10,
   current: 1,
   records: [],
-  user: undefined,
+  user: localStorage.getItem('user'),
   level: "简单",
   roundTime: 30,
   leftTime: 30,

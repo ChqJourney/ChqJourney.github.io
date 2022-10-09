@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Delete from "./delete.svelte";
+  import Delete from "../../assets/icons/deleteIcon.svelte";
   import { calculatorData } from "../../stores/calculatorStore";
   import Key from "./key.svelte";
   import { createRandomTis, findNextTi } from "../../funcs/common";
@@ -81,7 +81,7 @@
     }
     // 如果每题答案都答对了，则游戏成功，且提示用户
     if ($calculatorData.tis.every((m) => m.verdict === true)) {
-      // success to do
+      $calculatorData.status='idle'
     }
     return;
   };

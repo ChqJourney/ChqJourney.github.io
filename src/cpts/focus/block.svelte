@@ -1,8 +1,8 @@
 <script lang="ts">
   import { focusData } from "../../stores/focusStore";
-  import MagIcon from "./magIcon.svelte";
-  import HeartIcon from "./heartIcon.svelte";
-  import BianbianIcon from "./bianbianIcon.svelte";
+  import MagIcon from "../../assets/icons/magIcon.svelte";
+  import HeartIcon from "../../assets/icons/heartIcon.svelte";
+  import BianbianIcon from "../../assets/icons/bianbianIcon.svelte";
   import { findMinElement } from "../../funcs/common";
   import {sound} from "../../pages/focus.svelte"
 

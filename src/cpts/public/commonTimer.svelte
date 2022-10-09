@@ -1,19 +1,23 @@
 <script lang="ts">
-  import {
-    afterUpdate,
-    createEventDispatcher,
-  } from "svelte";
+  import { afterUpdate, createEventDispatcher } from "svelte";
 
   export let duration: number;
   export let operation: string = "idle";
-  export let noBoard=false
-  $: dur = duration * 1000;
+  export let noBoard = false;
+  
+  const boardCss=`${
+    noBoard ? "" : "border"
+  }`
   let interval = null;
   $: reminder = false;
   $: sec = duration * 1000;
+  const basicCss=`${
+    reminder ? "animate-pulse border-red-500" : "border-sky-400"
+  } text-sm sm:text-xl  text-center rounded-md px-1 mx-1 justify-center text-lime-700 flex items-center font-sans`
+  console.log(`${basicCss.concat(" ").concat(boardCss)}`)
   const dispatch = createEventDispatcher();
   const startAction = () => {
-    if (sec !== 0) {
+    if (sec > 0) {
       interval = setInterval(() => (sec = sec - 100), 100);
     }
   };
@@ -21,17 +25,11 @@
     if (interval) {
       clearInterval(interval);
     }
-
-    setTimeout(() => {
-      sec = duration * 1000;
-      operation = "idle";
-    }, 1000);
   };
   afterUpdate(() => {
     switch (operation) {
       case "running":
-        console.log('start in')
-        if (interval===null) {
+        if (interval === null) {
           startAction();
           dispatch("start");
         }
@@ -43,9 +41,11 @@
       case "idle":
         if (interval) {
           clearInterval(interval);
-          interval=null
+          interval = null;
         }
-
+        if(sec!==duration*1000){
+          dispatch("stopped",{elapsed:sec})
+        }
         setTimeout(() => {
           sec = duration * 1000;
         }, 1000);
@@ -53,14 +53,9 @@
       case "pending":
         if (interval) {
           clearInterval(interval);
-          interval=null
+          interval = null;
         }
-        dur = sec;
-        dispatch("pending");
-        break;
-      case "success":
-        stopAction();
-        dispatch("success");
+        dispatch("pending",{elapsed:sec});
         break;
     }
   });
@@ -75,22 +70,7 @@
 </script>
 
 <div
-  class={`${
-    reminder ? "animate-pulse border-red-500" : "border-sky-400"
-  } text-sm sm:text-xl {${noBoard?"":"border"}} text-center rounded-md px-1 mx-1 justify-center text-lime-700 flex items-center font-sans`}
+  class={`${basicCss.concat(" ").concat(boardCss)}`}
 >
   {timeFormat(sec)}
 </div>
-
-<style>
-  .container {
-    display: flex;
-    border: 1px solid skyblue;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-  }
-  .container:hover {
-    border: 1px solid lightcoral;
-  }
-</style>

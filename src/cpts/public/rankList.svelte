@@ -1,7 +1,7 @@
-
-    <script lang='ts'>
+<script lang='ts'>
     import RankItem from './rankItem.svelte'
-    import {focusData} from '../../stores/focusStore'
+  import type { Rank } from '../../models/focus';
+    export let records:Rank[]=[]
     </script>
      
 <table class="table-auto hover:table-fixed rounded-lg">
@@ -15,12 +15,12 @@
     </thead>
     <tbody>
        
-        {#each $focusData.records as rank, i}
+        {#each records as rank, i}
         <RankItem rank={rank} idx={i+1}/>
         {/each}
     </tbody>
 </table>
-{#if $focusData.records.length===0}
+{#if records.length===0}
      <div class="w-full text-center blank font-sans">no records</div>
      {:else}
      <div></div>
@@ -34,4 +34,3 @@
         font-size: 0.5rem;
     }
 </style>
-

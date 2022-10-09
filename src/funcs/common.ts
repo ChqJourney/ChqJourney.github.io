@@ -13,6 +13,7 @@ function createRandomArray(num: number): number[] {
     return arr
 }
 
+
 function findMinElement(numArr: number[]): {num:number,idx:number} {
     let temp = numArr.length
     let index=0
@@ -114,5 +115,21 @@ function findNextTi(currentIdx:number,total:number,tis:Ti[]):number{
     }
     return nextIdx;
 }
+const createRandomRememberArray=(quantity:number,total:number):string=>{
+    const orign=[...new Array(quantity)].map((v,i)=>i+1).concat([...new Array(total-quantity)].map((v,i)=>0))
+    const randomList= shuffle(orign)
+    return randomList.join("")
+}
+
+function shuffle(arr:number[]):number[]{
+    var len = arr.length;
+    for(var i = 0; i < len - 1; i++){
+      var idx = Math.floor(Math.random() * (len - i));
+      var temp = arr[idx];
+      arr[idx] = arr[len - i - 1];
+      arr[len - i -1] = temp;
+    }
+    return arr;
+  }
 export {createRandomArray,findMinElement,readRecords,writeRecords,
-    validateAndPersistanceRecords,saveTopRank,createRandomTi,createRandomTis,findNextTi}
+    validateAndPersistanceRecords,saveTopRank,createRandomTi,createRandomTis,findNextTi,createRandomRememberArray}
