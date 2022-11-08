@@ -8,7 +8,7 @@
   import { findMinElement } from "../../funcs/common";
   export let num: number = 0;
   export let idx:number
-   export let status='idle'
+  //  export let status='idle'
    let show=false
   const clickFunc = async () => {
     checkClick(num)

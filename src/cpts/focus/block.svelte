@@ -5,7 +5,7 @@
   import BianbianIcon from "../../assets/icons/bianbianIcon.svelte";
   import { findMinElement } from "../../funcs/common";
   import {sound} from "../../pages/focus.svelte"
-
+  import {tap} from 'svelte-gestures'
   export let num: number = 0;
   
   $: blockSta = "idle";
@@ -50,7 +50,7 @@
 
 </button>
 {:else}
-  <button class="text-sm sm:text-2xl" on:click={clickFunc}>
+  <button class="text-sm sm:text-2xl" use:tap on:tap={clickFunc}>
     <div class="absolute">
         {#if num===0}
         <div class="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">

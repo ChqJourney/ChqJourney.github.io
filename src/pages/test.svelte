@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import CommonTimer from "../cpts/public/commonTimer.svelte";
 
 $:oper='idle'
@@ -12,12 +12,13 @@ const stopped=(e:any)=>{
 const pending=(e:any)=>{
     time=e.detail.elapsed/1000
 }
-</script>
+</script> -->
 
-<div class="w-20 h-10">
+
+<!-- <div class="w-20 h-10"> -->
 
     
-    <CommonTimer duration={10} operation={oper} noBoard={false} 
+    <!-- <CommonTimer duration={10} operation={oper} noBoard={false} 
     on:stopped={stopped}
     on:pending={pending}/>
 </div>
@@ -26,8 +27,11 @@ const pending=(e:any)=>{
 <button on:click={()=>operation('idle')}>Reset</button>
 <button on:click={()=>operation('pending')}>Pending</button>
 
-<div>{time}</div>
+<div>{time}</div> -->
 
+
+<button>start</button>
+<button>Stop</button>
 <style>
     button{
         border: 1px solid orange;
