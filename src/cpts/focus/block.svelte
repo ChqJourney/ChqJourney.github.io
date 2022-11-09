@@ -57,7 +57,7 @@
             <HeartIcon />
         </div>
         {:else}
-        {num}
+        {num}  
         {/if}
     </div>
 </button>

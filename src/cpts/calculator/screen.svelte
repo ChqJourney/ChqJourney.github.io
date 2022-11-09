@@ -9,7 +9,7 @@
 
 <div class="w-full lg:w-[500px] h-full bg-sky-600 pb-2 pt-2">
   <div
-    class=" h-full flex justify-center items-center bg-sky-800 mx-2 rounded-lg py-2 relative"
+    class=" h-full flex justify-center items-center bg-sky-800 mx-2 rounded-lg py-4 relative"
   >
     <div class="absolute left-2 top-1 text-lg font-bold text-orange-600">
       <div class="w-14 h-full">
@@ -43,9 +43,11 @@
       <DisplayUnit
         content={$calculatorData.tis[$calculatorData.current - 1] ? "=" : ""}
       />
-      {#each $calculatorData.input as num}
-        <DisplayUnit content={num} />
-      {/each}
+      
+       
+          
+          
+          <DisplayUnit content={$calculatorData.input} />
     {:else}
       <div class="h-12 sm:h-24 text-xs flex items-center sm:text-xl text-white">
         {$calculatorData.user ?? "hi friend"}，按开始键游戏......

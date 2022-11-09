@@ -1,30 +1,21 @@
 <script lang="ts">
   import Delete from "../../assets/icons/deleteIcon.svelte";
-  import { calculatorData } from "../../stores/calculatorStore";
+  import { calculatorData, initializeStore, updateInput, updateLevel, updateQuantity } from "../../stores/calculatorStore";
   import Key from "./key.svelte";
   import { createRandomTis, findNextTi } from "../../funcs/common";
   const level = ["简单", "普通", "困难"];
-  console.log($calculatorData);
+  
   let keys = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const changeLevel = () => {
-    if ($calculatorData.status === "idle") {
-      const idx = level.findIndex((v) => v === $calculatorData.level);
-      // const newIdx = idx === level.length - 1 ? 0 : idx + 1;
-      const newLevel = idx === level.length - 1 ? level[0] : level[idx + 1];
-      $calculatorData.level = newLevel;
-    }
+    updateLevel()
   };
   const changeQuantity = () => {
-    if ($calculatorData.status === "idle") {
-      $calculatorData.total =
-        $calculatorData.total === 50 ? 10 : $calculatorData.total + 10;
-    }
+    updateQuantity()
   };
   const onOffAction = () => {
-    console.log($calculatorData.status);
     if ($calculatorData.status === "running") {
       $calculatorData.status = "idle";
-      
+      initializeStore()
     } else {
       $calculatorData.status = "running";
       $calculatorData.tis = createRandomTis({
@@ -36,10 +27,7 @@
    
   };
   const changeInput = (key: string | number) => {
-    if ($calculatorData.input.length < 3) {
-      $calculatorData.input = `${$calculatorData.input}${key}`.trim();
-      console.log($calculatorData.input);
-    }
+    updateInput(key)
   };
   const confirm = () => {
     if ($calculatorData.input === " ") {
