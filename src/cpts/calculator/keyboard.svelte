@@ -1,8 +1,9 @@
 <script lang="ts">
   import Delete from "../../assets/icons/deleteIcon.svelte";
-  import { calculatorData, initializeStore, updateInput, updateLevel, updateQuantity } from "../../stores/calculatorStore";
+  import { calculatorData, initializeStore, powerBtn, updateInput, updateLevel, updateQuantity } from "../../stores/calculatorStore";
   import Key from "./key.svelte";
   import { createRandomTis, findNextTi } from "../../funcs/common";
+    import { sound } from "../../pages/focus.svelte";
   const level = ["简单", "普通", "困难"];
   
   let keys = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -13,18 +14,7 @@
     updateQuantity()
   };
   const onOffAction = () => {
-    if ($calculatorData.status === "running") {
-      $calculatorData.status = "idle";
-      initializeStore()
-    } else {
-      $calculatorData.status = "running";
-      $calculatorData.tis = createRandomTis({
-        quantity: $calculatorData.total,
-        mode: $calculatorData.level,
-      });
-      
-    }
-   
+    powerBtn()
   };
   const changeInput = (key: string | number) => {
     updateInput(key)
@@ -35,15 +25,16 @@
     }
     // 判断此题是否已答对过
     if ($calculatorData.tis[$calculatorData.current - 1]?.verdict !== true) {
-      console.log("in");
+      
       // 没答过或没答对过，则更新verdict后，提交tis
       var ans = parseInt($calculatorData.input);
       $calculatorData.tis.forEach((v, i) => {
         if (i === $calculatorData.current - 1) {
           if ($calculatorData.tis[$calculatorData.current - 1].answer === ans) {
-            console.log('right')
+            sound.play('correct')
             v.verdict = true;
           } else {
+            sound.play('wrong')
             v.verdict = false;
           }
           return v;
@@ -65,11 +56,18 @@
         $calculatorData.total,
         $calculatorData.tis
       );
-      $calculatorData.input = " ";
+      
+      // $calculatorData.input = " ";
     }
     // 如果每题答案都答对了，则游戏成功，且提示用户
     if ($calculatorData.tis.every((m) => m.verdict === true)) {
-      $calculatorData.status='idle'
+      setTimeout(() => {
+        
+        $calculatorData.status='idle'
+      }, 1000);
+      $calculatorData.status='success'
+      sound.play('success')
+
     }
     return;
   };

@@ -60,7 +60,7 @@
         break;
       case "success":
         stopAction();
-        dispatch("success");
+        dispatch("success",{leftTime:sec/1000});
         break;
     }
   });

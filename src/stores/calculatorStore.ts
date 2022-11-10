@@ -2,7 +2,7 @@ import type { Rank } from "src/models/focus";
 import { writable } from "svelte/store";
 import type { Ti } from "../models/calculator";
 import  { state } from "../models/state";
-import { createRandomTis, findNextTi } from "../funcs/common";
+import { createRandomTis, findNextTi, readExistedRecords } from "../funcs/common";
 
 const initState: {
   status: string;
@@ -31,7 +31,12 @@ const initState: {
 export const calculatorData = writable(initState);
 
 export const initializeStore=()=>{
-  calculatorData.update(val=>initState)
+  calculatorData.update(val=>{
+    val.current=1;
+    val.tis=[];
+    val.input=" ";
+    return val;
+  })
 }
 export const createTis=()=>{
   calculatorData.update(val=>{
@@ -46,6 +51,7 @@ export const updateLevel=()=>{
       const idx = level.findIndex((v) => v === val.level);
       const newLevel = idx === level.length - 1 ? level[0] : level[idx + 1];
       val.level=newLevel
+      val.records=readExistedRecords("calculator-records",`${val.level}x${val.total}`)
     }
     return val
   })
@@ -54,6 +60,7 @@ export const updateQuantity=()=>{
   calculatorData.update(val=>{
     if(val.status==='idle'){
       val.total=val.total===50 ? 10 : val.total + 10;
+      val.records=readExistedRecords("calculator-records",`${val.level}x${val.total}`)
     }
     return val
   })
@@ -66,4 +73,18 @@ export const updateInput=(st:string|number)=>{
     }
     return val
   })
+}
+
+export const powerBtn=()=>{
+  calculatorData.update(val=>{
+    if (val.status === "running") {
+      val.status = "idle";
+      initializeStore()
+    } else {
+      val.status = "running";
+      createTis()
+  }
+  return val
+}
+  );
 }

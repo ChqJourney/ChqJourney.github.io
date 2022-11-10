@@ -27,6 +27,12 @@ function findMinElement(numArr: number[]): {num:number,idx:number} {
     }
     return {num:temp,idx:index}
 }
+const readExistedRecords=(key:string,subKey:string)=>{
+    const recordsStr=localStorage.getItem(key)
+    if(!recordsStr)return []
+  if(!JSON.parse(recordsStr)[subKey])return []
+  return recordsStr?JSON.parse(recordsStr)[subKey]:[]
+}
 const readRecords=(level:number):[]=>{
     const recordsStr=localStorage.getItem("focus-records")
     // console.log(JSON.parse(`level${level}`))
@@ -131,5 +137,5 @@ function shuffle(arr:number[]):number[]{
     }
     return arr;
   }
-export {createRandomArray,findMinElement,readRecords,writeRecords,
+export {createRandomArray,findMinElement,readRecords,writeRecords,readExistedRecords,
     validateAndPersistanceRecords,saveTopRank,createRandomTi,createRandomTis,findNextTi,createRandomRememberArray}
