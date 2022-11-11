@@ -88,3 +88,10 @@ export const powerBtn=()=>{
 }
   );
 }
+export const timeout=()=>{
+  calculatorData.update(val=>{
+    val.status='idle'
+    val.tis=[]
+    return val
+  })
+}

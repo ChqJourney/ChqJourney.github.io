@@ -1,12 +1,18 @@
 <script lang="ts">
-    import { readExistedRecords, validateAndPersistanceRecords } from "../../funcs/common";
-  import { calculatorData } from "../../stores/calculatorStore";
+    import { sound } from "../../pages/focus.svelte";
+  import { readExistedRecords, validateAndPersistanceRecords } from "../../funcs/common";
+  import { calculatorData, timeout } from "../../stores/calculatorStore";
 
   import Timer from "../public/timer.svelte";
   import DisplayUnit from "./displayUnit.svelte";
 
   import ErrorZone from "./errorZone.svelte";
- 
+  const timeoutAction=()=>{
+    sound.play('timeout')
+    setTimeout(()=>{
+      timeout()
+    },2000)
+  }
   const successAction = (e: any) => {
     const newRecord = {
       elapseTime: $calculatorData.roundTime - e.detail.leftTime.toFixed(2),
@@ -34,7 +40,7 @@
         <Timer
           noBoard={true}
           on:start={() => {}}
-          on:timeout={() => $calculatorData.status === "idle"}
+          on:timeout={timeoutAction}
           on:success={successAction}
           duration={$calculatorData.roundTime}
           operation={$calculatorData.status}
