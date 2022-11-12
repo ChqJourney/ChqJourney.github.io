@@ -60,6 +60,7 @@ export const updateQuantity=()=>{
   calculatorData.update(val=>{
     if(val.status==='idle'){
       val.total=val.total===50 ? 10 : val.total + 10;
+      val.roundTime=val.total*3;
       val.records=readExistedRecords("calculator-records",`${val.level}x${val.total}`)
     }
     return val
