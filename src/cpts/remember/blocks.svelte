@@ -10,10 +10,10 @@
 
 <div class={`contain rounded-md level${$rememberData.dimension}`}>
   {#each tis.blocks as ar,i}
-    <Block num={parseInt(ar)} status={status} idx={i}/>
+    <Block num={parseInt(ar)} idx={i}/>
   {/each}
 </div>
-
+ 
 <style>
   .contain {
     padding: 0.5rem;

@@ -23,8 +23,8 @@ const initState: {
   records: [],
   user: localStorage.getItem('user'),
   level: "简单",
-  roundTime: 30,
-  leftTime: 30,
+  roundTime: 40,
+  leftTime: 40,
   input:" "
 };
 
@@ -44,13 +44,18 @@ export const createTis=()=>{
     return val
   })
 }
+
+
 export const updateLevel=()=>{
   calculatorData.update(val=>{
     if(val.status==='idle'){
       const level = ["简单", "普通", "困难"];
       const idx = level.findIndex((v) => v === val.level);
       const newLevel = idx === level.length - 1 ? level[0] : level[idx + 1];
+      const newLevelIdx=level.findIndex(v=>v===newLevel)
+      const factor=1+0.5*newLevelIdx
       val.level=newLevel
+      val.roundTime=val.total*4*factor
       val.records=readExistedRecords("calculator-records",`${val.level}x${val.total}`)
     }
     return val
@@ -59,8 +64,11 @@ export const updateLevel=()=>{
 export const updateQuantity=()=>{
   calculatorData.update(val=>{
     if(val.status==='idle'){
+      const level = ["简单", "普通", "困难"];
       val.total=val.total===50 ? 10 : val.total + 10;
-      val.roundTime=val.total*3;
+      const idx = level.findIndex((v) => v === val.level);
+      const factor=1+0.5*idx
+      val.roundTime=val.total*4*factor
       val.records=readExistedRecords("calculator-records",`${val.level}x${val.total}`)
     }
     return val

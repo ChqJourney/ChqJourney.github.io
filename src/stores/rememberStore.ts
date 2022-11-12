@@ -2,6 +2,9 @@ import type { Rank } from '../models/focus';
 import { writable } from 'svelte/store';
 const initBlocks=[{blocks:"000000000"},{blocks:"000000000"},{blocks:"000000000"},{blocks:"000000000"},{blocks:"000000000"},{blocks:"000000000"},{blocks:"000000000"},{blocks:"000000000"},{blocks:"000000000"}]
 
+
+
+
 const initState: {
     arr: RememberTi[];
     showIdx:number[];
@@ -12,7 +15,7 @@ const initState: {
     status: string;
     elapseTime: number;
     records: Rank[];
-  } = {
+  } = { 
     arr: initBlocks,
     showIdx:[],
     dimension: 9,

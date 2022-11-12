@@ -10,7 +10,6 @@
   $: start='idle'
   const startAction = () => {
     $rememberData.status = "running";
-
     for (let index = 0; index < $rememberData.dimension; index++) {
         const ar = createRandomRememberArray(3, 9);
         $rememberData.arr[index] = { blocks: ar };

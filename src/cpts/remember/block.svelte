@@ -41,7 +41,7 @@
         show=false
       }, 1000);
     }
-  }
+  } 
   const findCorrectKey=(arr:number[])=>{
     let temp=10000
     for (let index = 0; index < arr.length; index++) {
