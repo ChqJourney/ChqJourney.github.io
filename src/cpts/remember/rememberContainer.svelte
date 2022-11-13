@@ -1,64 +1,86 @@
 <script lang="ts">
+  import LevelOpt from './LevelOpt.svelte';
+
+  import { sleep } from "../../pages/focus.svelte";
   import { afterUpdate, beforeUpdate, onMount, tick } from "svelte";
   import { createRandomRememberArray } from "../../funcs/common";
-  import { rememberData } from "../../stores/rememberStore";
-  import ArrayOpts from "../focus/arrayOpts.svelte";
+  import {
+    hideTi,
+    initArr,
+    recordTiResult,
+    rememberData,
+    setRoundStatus,
+    switchGame,
+    startShowTi,
+    triggerNextAction,
+  } from "../../stores/rememberStore";
   import Counter from "../public/counter.svelte";
   import Timer from "../public/timer.svelte";
   import Blocks from "./blocks.svelte";
+    import ErrorIndicator from "./ErrorIndicator.svelte";
+    $:opt='简单'
+    
+    const showTxt = { idle: "Start", running: "Stop", pending: "Resume",success:"done" };
+  const startAction = async () => {
+    if($rememberData.status==='idle'){
+      switchGame();
+      initArr();
+      startShowTi();
+      await sleep(1000);
+      hideTi();
+      setRoundStatus("running");
+    }else{
+      $rememberData.status='idle'
+      initArr()
 
-  $: start='idle'
-  const startAction = () => {
-    $rememberData.status = "running";
-    for (let index = 0; index < $rememberData.dimension; index++) {
-        const ar = createRandomRememberArray(3, 9);
-        $rememberData.arr[index] = { blocks: ar };
     }
-    $rememberData.arr[$rememberData.current].blocks
-    $rememberData.showIdx = [1,2,3];
-    setTimeout(() => {
-      $rememberData.showIdx = [];
-      start='running'
-    }, 1000);
-
   };
-  const triggerCounter=async()=>{
-    // start='idle'
-    $rememberData.arr[$rememberData.current].verdict=false
-    $rememberData.current++
-    // await tick()
-    start='idle'
-    $rememberData.showIdx=[1,2,3]
-    setTimeout(() => {
-      $rememberData.showIdx = [];
-      start='running'
-    }, 1000);
-  }
+  const timeoutFuc = async () => {
+    setRoundStatus("fail");
+    recordTiResult(false);
+    startShowTi();
+    await sleep(1000);
+    hideTi();
+    await sleep(2000);
+    triggerNextAction();
+    startShowTi();
+    await sleep(1000);
+    hideTi();
+    setRoundStatus("running");
+  };
+  const successFuc = async () => {
+    setRoundStatus("idle");
+    await sleep(1000)
+    recordTiResult(true);
+    hideTi()
+    await sleep(1000);
+    setRoundStatus("running");
+    triggerNextAction();
+    startShowTi();
+    await sleep(1000);
+    hideTi();
+  };
 </script>
 
 <div class="text-xs sm:text-lg">
   <div class="flex justify-between items-center my-1 px-2">
-    <div class="text-xs sm:text-lg">
-      <span class="">Level:</span>
-      <select class=" rounded-md px-1" title="level">
-        <option>简单</option>
-        <option>普通</option>
-        <option>困难</option>
-      </select>
-    
-    </div>
-    <button class="btnPrimary" on:click={startAction}>Start</button>
+    <LevelOpt ></LevelOpt>
+    <button class="btnPrimary" on:click={startAction}>{showTxt[$rememberData.status]}</button>
   </div>
   <div class="flex justify-between items-center my-1 px-2">
-    <div>
-      <span>Error:</span>
-      <span>1</span>
-    </div>
-    <Counter total={$rememberData.arr.length} idx={$rememberData.current}/>
-    <Timer duration={5} operation={start} on:timeout={triggerCounter}/>
+   <ErrorIndicator />
+    <Counter total={$rememberData.total} idx={$rememberData.current} />
+    
+    <Timer
+      duration={5}
+      operation={$rememberData.roundStatus}
+      on:success={successFuc}
+      on:timeout={timeoutFuc}
+    />
+    
   </div>
   <Blocks
-    tis={$rememberData.arr[$rememberData.current]}
-    status={$rememberData.status}
+    tis={$rememberData.arr[$rememberData.current - 1]}
+   
   />
 </div>

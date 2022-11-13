@@ -22,7 +22,7 @@ body{
 }
 @layer components{
   .btnPrimary{
-    @apply bg-blue-400 w-16 sm:w-24 rounded-md hover:bg-blue-300
+    @apply bg-blue-400 w-16 sm:w-24 rounded-md text-sm font-sans hover:bg-blue-300
   }
 }
 

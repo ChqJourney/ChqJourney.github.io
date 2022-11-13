@@ -1,11 +1,8 @@
 <script lang="ts">
+  
   import Block from "./block.svelte";
   import { rememberData, type RememberTi } from "../../stores/rememberStore";
   export let tis: RememberTi;
-
-  export let status;
-
-  console.log($rememberData.arr);
 </script>
 
 <div class={`contain rounded-md level${$rememberData.dimension}`}>
@@ -19,7 +16,6 @@
     padding: 0.5rem;
     display: grid;
     justify-items: center;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.3rem;
     width: 98%;
     height: 100%;

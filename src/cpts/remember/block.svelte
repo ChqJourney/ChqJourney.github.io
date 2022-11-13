@@ -2,64 +2,40 @@
   import MagIcon from "../../assets/icons/magIcon.svelte";
   import HeartIcon from "../../assets/icons/heartIcon.svelte";
   import BianbianIcon from "../../assets/icons/bianbianIcon.svelte";
-  import { sound } from "../../pages/focus.svelte";
+  import { sleep, sound } from "../../pages/focus.svelte";
   import { fade } from 'svelte/transition';
-  import { rememberData } from "../../stores/rememberStore";
+  import { hideTi, recordTiResult, rememberData, setRoundStatus, startShowTi, triggerNextAction } from "../../stores/rememberStore";
   import { findMinElement } from "../../funcs/common";
   export let num: number = 0;
   export let idx:number
   //  export let status='idle'
    let show=false
   const clickFunc = async () => {
-    checkClick(num)
-    
-  };
-  const checkClick=(num:number)=>{
-    console.log('check')
-    const st=$rememberData.arr[$rememberData.current].blocks[idx]
-    const arr=Array.from(st).map(v=>parseInt(v))
-    const correctKey=findCorrectKey(arr)
+    if(num===0)return;
+    if($rememberData.showIdx.includes(num))return;
+    let correctKey=1
+    for (let index = 0; index < $rememberData.total; index++) {
+      if(!$rememberData.showIdx.includes(index+1)){
+        correctKey=index+1;
+        break;
+      }     
+    }
     console.log(correctKey)
-    if(num===correctKey&&num!==0){
+    if(num===correctKey){
       $rememberData.showIdx=[...$rememberData.showIdx,correctKey]
       if($rememberData.showIdx.length===$rememberData.quantity){
-        $rememberData.arr[$rememberData.current].verdict=true
-        setTimeout(()=>{
-          $rememberData.showIdx=[]
-          setTimeout(() => {
-            $rememberData.current++
-            $rememberData.showIdx=[1,2,3]
-            setTimeout(() => {
-              $rememberData.showIdx=[]
-            }, 1000);
-          }, 1000);
-        },1000)
+        setRoundStatus('success')
+      }
+      if($rememberData.arr.every((v,i)=>v.verdict)){
+        
       }
     }else{
       show=true
-      setTimeout(() => {
-        show=false
-      }, 1000);
+      await sleep(1000)
+      show=false
     }
-  } 
-  const findCorrectKey=(arr:number[])=>{
-    let temp=10000
-    for (let index = 0; index < arr.length; index++) {
-      const element = arr[index];
-      if(element!==0){
-        if(element<temp){
-          temp=element
-        }
-      }
-    }
-    console.log(temp)
-    if(temp!==10000){
-      return temp
-    }
-    else{
-      return 0
-    }
-  }
+  };
+ 
 </script>
 
 
@@ -68,7 +44,7 @@
   on:click={()=>clickFunc()}
 >
   {#if $rememberData.showIdx.includes(num)}
-    <div transition:fade class="absolute">
+    <div transition:fade class=“absolute”>
       {num}
     </div>
     {:else if show}

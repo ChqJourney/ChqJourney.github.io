@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" type="ts">
   import { Howl, Howler } from "howler";
   export const sound = new Howl({
     src: ["effects.mp3"],
@@ -10,6 +10,11 @@
       start: [10106, 2050],
     },
   });
+
+  export const sleep=(interval:number)=>{
+  return new Promise((resolve)=>    
+      setTimeout(resolve,interval))
+  }
 </script>
 
 <script lang="ts">
