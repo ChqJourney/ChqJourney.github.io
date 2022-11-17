@@ -23,7 +23,7 @@ const initState: {
   quantity: 4,
   total: 10,
   current: 1,
-  user: localStorage.getItem("user"),
+  user: localStorage.getItem("user")??"friend",
   status: "idle",
   roundStatus:'idle',
   level: '简单',

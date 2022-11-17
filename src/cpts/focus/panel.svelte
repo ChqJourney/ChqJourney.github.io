@@ -9,7 +9,6 @@
   
   const showTxt = { idle: "Start", running: "Stop", pending: "Resume",success:"done" };
   const btnAction = async() => {
-    
     switch ($focusData.status) {
       case "idle":
         $focusData.arr = createRandomArray(
