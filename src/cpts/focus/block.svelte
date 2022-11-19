@@ -17,8 +17,8 @@
       $focusData.arr[target.idx] = 0;
       blockSta = "correct";
       if ($focusData.arr.every((n) => n === 0)) {
-        $focusData.status='success'
-        sound.play('success')
+        $focusData.status='reset'
+        // sound.play('success')
       }
     } else {
         sound.play('wrong')

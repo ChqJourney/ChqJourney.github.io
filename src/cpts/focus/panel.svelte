@@ -1,22 +1,29 @@
-<script>
-
+<script type="ts">
   import { createRandomArray } from "../../funcs/common";
   import { focusData } from "../../stores/focusStore";
-
+  import {
+    readRecords,
+    validateAndPersistanceRecords,
+  } from "../../funcs/common";
   import ArrayOpts from "./arrayOpts.svelte";
-  import Timer from "./timer.svelte";
-  import {sound} from "../../pages/focus.svelte"
-  
-  const showTxt = { idle: "Start", running: "Stop", pending: "Resume",success:"done" };
-  const btnAction = async() => {
+  import { sound } from "../../pages/focus.svelte";
+  import PaTimer from "../public/timer/paTimer.svelte";
+
+  const showTxt = {
+    idle: "Start",
+    running: "Stop",
+    pending: "Resume",
+    success: "done",
+  };
+  const btnAction = async () => {
     switch ($focusData.status) {
       case "idle":
         $focusData.arr = createRandomArray(
           $focusData.dimension * $focusData.dimension
         );
-        sound.play("start")
+        sound.play("start");
         setTimeout(() => ($focusData.status = "running"), 1000);
-        console.log($focusData.arr);
+        // console.log($focusData.arr);
         break;
       case "running":
         $focusData.status = "idle";
@@ -26,13 +33,38 @@
         break;
     }
   };
+  const onSuccess = (e: any) => {
+    sound.play("success");
+    const newRecord = {
+      elapseTime: ($focusData.roundTime - e.detail.currentTime / 1000).toFixed(
+        2
+      ),
+      user: localStorage.getItem("user"),
+      createdAt: new Date().toLocaleString(),
+      dimension: $focusData.dimension,
+    };
+    const existRecords = readRecords($focusData.dimension);
+    const updateRecords = validateAndPersistanceRecords(
+      existRecords,
+      newRecord
+    );
+    var str = localStorage.getItem("focus-records");
+    let obj: any = str ? JSON.parse(str) : {};
+    localStorage.removeItem("focus-records");
+    obj[`level${$focusData.dimension}`] = [...updateRecords];
+    localStorage.setItem("focus-records", JSON.stringify(obj));
+    $focusData.records = readRecords($focusData.dimension);
+    setTimeout(() => ($focusData.status = "idle"), 1000);
+  };
 </script>
 
 <div class="h-10 sm:h-12">
-  <Timer
+  <PaTimer
     operation={$focusData.status}
+    interval={100}
     duration={$focusData.roundTime}
-    on:stop={() => setTimeout(() => ($focusData.status = "idle"), 1000)}
+    on:reset={onSuccess}
+    on:timeup={() => setTimeout(() => ($focusData.status = "idle"), 1000)}
   />
   <ArrayOpts />
   <button

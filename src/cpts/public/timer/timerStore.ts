@@ -27,7 +27,7 @@ export function createTimer(duration,interval,isDecrease){
 			reset:()=>{
 				if(timer){
                     clearInterval(timer)
-                    // set(startNum)
+                    set(startNum)
                 }
 			}
 		
