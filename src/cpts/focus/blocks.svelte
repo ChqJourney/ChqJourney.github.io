@@ -1,7 +1,8 @@
+
 <script lang="ts">
     import Block from "./block.svelte";
     import {focusData} from '../../stores/focusStore'
-    import {beforeUpdate} from 'svelte'
+    import {beforeUpdate, onMount} from 'svelte'
     export let blocks:number[]
     let dimension
     beforeUpdate(()=>{

@@ -39,7 +39,6 @@
       <div class="w-14 h-full">
         <Timer
           noBoard={true}
-          on:start={() => {}}
           on:timeout={timeoutAction}
           on:success={successAction}
           duration={$calculatorData.roundTime}

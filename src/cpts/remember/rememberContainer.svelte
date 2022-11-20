@@ -29,7 +29,6 @@
     }else{
       $rememberData.status='idle'
       initArr()
-
     }
   };
   const timeoutFuc = async () => {
