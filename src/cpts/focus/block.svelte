@@ -1,24 +1,27 @@
 <script lang="ts">
-  import { focusData } from "../../stores/focusStore";
+  import { focusData, setNum, setStatus, setTimer } from "../../stores/focusStore";
   import MagIcon from "../../assets/icons/magIcon.svelte";
   import HeartIcon from "../../assets/icons/heartIcon.svelte";
   import BianbianIcon from "../../assets/icons/bianbianIcon.svelte";
   import { findMinElement } from "../../funcs/common";
   import {sound} from "../../pages/focus.svelte"
   import {tap} from 'svelte-gestures'
+    import { onMount } from "svelte";
   export let num: number = 0;
-  
+  let status;
+  let arr;
+  onMount(()=>focusData.subscribe(val=>{status=val.status;arr=val.arr}))
   $: blockSta = "idle";
   const clickFunc = async() => {
-    if ($focusData.status !== "running") return;
+    if (status !== "running") return;
     const target = findMinElement($focusData.arr);
     if (num === target.num) {
         sound.play('correct')
-      $focusData.arr[target.idx] = 0;
+      setNum(0,target.idx)
       blockSta = "correct";
-      if ($focusData.arr.every((n) => n === 0)) {
-        $focusData.status='reset'
-        // sound.play('success')
+      if (arr.every((n:number) => n === 0)) {
+        setStatus('success')
+        setTimer('idle')
       }
     } else {
         sound.play('wrong')
@@ -30,19 +33,19 @@
   };
 </script>
 
-{#if $focusData.status === "idle"}
+{#if status === "idle"}
   <button>
     <div class="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
         <MagIcon />
     </div>
 </button>
-{:else if $focusData.status === "running" && num === 0}
+{:else if status === "running" && num === 0}
   <button>
     <div class="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
     <HeartIcon />
 </div>
 </button>
-{:else if $focusData.status === "running" && blockSta === "wrong"}
+{:else if status === "running" && blockSta === "wrong"}
   <button class="shake">
     <div class="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
     <BianbianIcon />

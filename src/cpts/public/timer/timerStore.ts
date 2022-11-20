@@ -2,6 +2,7 @@ import {writable} from 'svelte/store'
 
 export function createTimer(duration,interval,isDecrease){
 	let startNum=isDecrease?duration:0
+	
 	const {subscribe,update,set}=writable(startNum)
 	let timer
 	return {
@@ -20,15 +21,16 @@ export function createTimer(duration,interval,isDecrease){
 			},
 			stopTick:()=>{
                 if(timer){
-                    console.log('stoptick')
                     clearInterval(timer)
                 }
 			},
 			reset:()=>{
+				console.log('reset')
+				console.log(startNum)
 				if(timer){
-                    clearInterval(timer)
-                    set(startNum)
+					clearInterval(timer)
                 }
+				set(startNum)
 			}
 		
 	}

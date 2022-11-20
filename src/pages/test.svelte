@@ -9,8 +9,9 @@
 </script>
 
 <div>
-    <button class="btnPrimary" on:click={()=>operation='start'}>Start</button>
-    <button class="btnPrimary" on:click={()=>operation='stop'}>Reset</button>
+    <button class="btnPrimary" on:click={()=>operation='running'}>Start</button>
+    <button class="btnPrimary" on:click={()=>operation='pending'}>pending</button>
+    <button class="btnPrimary" on:click={()=>operation='idle'}>reset</button>
     <PaTimer duration={10} interval={100} operation={operation} countDownSeconds={5}/>
 </div>
 <style>

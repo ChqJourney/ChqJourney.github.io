@@ -1,16 +1,19 @@
 
 <script lang="ts">
+    import { beforeUpdate } from 'svelte';
 import { readRecords } from '../../funcs/common';
 
-    import {focusData} from '../../stores/focusStore'
-    // console.log($focusData)
+    import {focusData, setDimension, setRecords} from '../../stores/focusStore'
+    let dimension,records;
+    beforeUpdate(()=>{
+        focusData.subscribe(val=>{
+            dimension=val.dimension
+            records=val.records
+        })
+    })
 const onSelection=(e)=>{
-
-    console.log($focusData)
-    $focusData.dimension=parseInt(e.target.value)
-    
-    $focusData.records=readRecords(e.target.value)
-    $focusData.arr=new Array($focusData.dimension*$focusData.dimension)
+    setDimension(parseInt(e.target.value))
+    setRecords(readRecords(e.target.value))
 }
 </script>
 

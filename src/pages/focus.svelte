@@ -11,25 +11,20 @@
     },
   });
 
-  export const sleep=(interval:number)=>{
-  return new Promise((resolve)=>    
-      setTimeout(resolve,interval))
-  }
 </script>
 
 <script lang="ts">
   import Header from "../cpts/public/header.svelte";
   import RankList from "../cpts/public/rankList.svelte";
   import GameContainer from "../cpts/focus/gameContainer.svelte";
-  import { focusData } from "../stores/focusStore";
+  import { focusData, setRecords } from "../stores/focusStore";
   import { onMount } from "svelte";
   import { readRecords } from "../funcs/common";
   import kelly from "../assets/kelly.png";
   import molly from "../assets/logo192.png";
-
+  
   onMount(() => {
-    $focusData.records = readRecords($focusData.dimension);
-    // console.log($focusData.records)
+    setRecords(readRecords(3))
   });
 </script>
 

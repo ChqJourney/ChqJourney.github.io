@@ -1,11 +1,15 @@
 <script lang="ts">
     import Block from "./block.svelte";
     import {focusData} from '../../stores/focusStore'
+    import {beforeUpdate} from 'svelte'
     export let blocks:number[]
-    
+    let dimension
+    beforeUpdate(()=>{
+      focusData.subscribe(val=>dimension=val.dimension)
+    })
   </script>
   
-  <div class={`contain rounded-md level${$focusData.dimension}`}>
+  <div class={`contain rounded-md level${dimension}`}>
     {#each blocks as ar}
       <Block num={ar}/>
     {/each}

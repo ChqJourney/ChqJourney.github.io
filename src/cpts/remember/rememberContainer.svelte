@@ -1,9 +1,5 @@
 <script lang="ts">
   import LevelOpt from './LevelOpt.svelte';
-
-  import { sleep } from "../../pages/focus.svelte";
-  import { afterUpdate, beforeUpdate, onMount, tick } from "svelte";
-  import { createRandomRememberArray } from "../../funcs/common";
   import {
     hideTi,
     initArr,
@@ -18,6 +14,7 @@
   import Timer from "../public/timer.svelte";
   import Blocks from "./blocks.svelte";
     import ErrorIndicator from "./ErrorIndicator.svelte";
+    import { sleep } from '../../funcs/common';
     $:opt='简单'
     
     const showTxt = { idle: "Start", running: "Stop", pending: "Resume",success:"done" };

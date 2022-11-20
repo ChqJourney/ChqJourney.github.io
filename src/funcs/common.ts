@@ -1,6 +1,10 @@
-import type { Ti } from "src/models/calculator";
+import type { Ti } from "../models/calculator";
 import type { Rank } from "../models/focus";
 
+export const sleep=(interval:number)=>{
+    return new Promise((resolve)=>    
+        setTimeout(resolve,interval))
+    }
 function createRandomArray(num: number): number[] {
 
     let arr = [...Array(num)].map((val, idx) => idx + 1)

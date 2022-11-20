@@ -2,10 +2,9 @@
   import MagIcon from "../../assets/icons/magIcon.svelte";
   import HeartIcon from "../../assets/icons/heartIcon.svelte";
   import BianbianIcon from "../../assets/icons/bianbianIcon.svelte";
-  import { sleep, sound } from "../../pages/focus.svelte";
   import { fade } from 'svelte/transition';
   import { hideTi, recordTiResult, rememberData, setRoundStatus, startShowTi, triggerNextAction } from "../../stores/rememberStore";
-  import { findMinElement } from "../../funcs/common";
+  import { findMinElement, sleep } from "../../funcs/common";
   export let num: number = 0;
   export let idx:number
   //  export let status='idle'
