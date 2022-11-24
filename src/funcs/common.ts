@@ -17,7 +17,6 @@ function createRandomArray(num: number): number[] {
     return arr
 }
 
-
 function findMinElement(numArr: number[]): {num:number,idx:number} {
     let temp = numArr.length
     let index=0

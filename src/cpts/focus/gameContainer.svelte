@@ -1,20 +1,20 @@
 
 <script lang="ts">
-import {onDestroy, onMount} from 'svelte'
+import {beforeUpdate, onDestroy, onMount} from 'svelte'
 import { focusData } from "../../stores/focusStore";
 import Blocks from "./blocks.svelte";
 import Panel from "./panel.svelte";
 
 let arr
 let unSubscribe
-onMount(()=>{
+beforeUpdate(()=>{
    unSubscribe= focusData.subscribe(val=>arr=val.arr)
 })
-onDestroy(unSubscribe)
+// onDestroy(unSubscribe)
 </script>
 
 
 <div>
     <Panel/>
-    <Blocks blocks={$focusData.arr}/>
+    <Blocks blocks={arr}/>
 </div>

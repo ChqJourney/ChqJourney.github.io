@@ -17,7 +17,7 @@ import { navigate } from "svelte-routing";
     alt="left"
   />
   <div class="text-center text-xs md:text-base mt-2">
-    <div>{userName}</div>
+    <div>{userName??'friend'}</div>
     <button class="hover:bg-sky-400 rounded-md" on:click={()=>toLink("/")}>
       <svg
         class="h-6 w-6 fill-orange-400"

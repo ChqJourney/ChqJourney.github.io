@@ -11,7 +11,7 @@
     validateAndPersistanceRecords,
   } from "../../funcs/common";
   import ArrayOpts from "./arrayOpts.svelte";
-  import { sound } from "../../pages/focus.svelte";
+  import { sound } from "../../App.svelte";
   import PaTimer from "../public/timer/paTimer.svelte";
   import { beforeUpdate, onMount, tick } from "svelte";
 

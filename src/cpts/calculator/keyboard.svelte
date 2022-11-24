@@ -3,7 +3,7 @@
   import { calculatorData, initializeStore, powerBtn, updateInput, updateLevel, updateQuantity } from "../../stores/calculatorStore";
   import Key from "./key.svelte";
   import { createRandomTis, findNextTi } from "../../funcs/common";
-    import { sound } from "../../pages/focus.svelte";
+    import { sound } from "../../App.svelte";
   const level = ["简单", "普通", "困难"];
   
   let keys = [1, 2, 3, 4, 5, 6, 7, 8, 9];

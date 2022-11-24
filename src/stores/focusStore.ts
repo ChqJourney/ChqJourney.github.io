@@ -5,7 +5,6 @@ import { createRandomArray } from '../funcs/common';
 const initState = { arr: new Array(3 * 3), dimension: 3, user: localStorage.getItem('user'), status: 'idle',timerStatus:'idle', roundTime: 30, leftTime: 30, records: [] }
 export const focusData = writable(initState);
 
-
 export const createTis=()=>{
     focusData.update(val=>{
         val.arr = createRandomArray(
@@ -33,7 +32,7 @@ export const setTimer=(timerStatus:string)=>{
         val.timerStatus=timerStatus
         return val
     })
-}
+} 
 
 export const setRecords=(records:any)=>{
     focusData.update(val=>{

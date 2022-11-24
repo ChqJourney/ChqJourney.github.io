@@ -4,7 +4,7 @@
   import HeartIcon from "../../assets/icons/heartIcon.svelte";
   import BianbianIcon from "../../assets/icons/bianbianIcon.svelte";
   import { findMinElement } from "../../funcs/common";
-  import {sound} from "../../pages/focus.svelte"
+  import {sound} from "../../App.svelte"
   import {tap} from 'svelte-gestures'
     import { onMount } from "svelte";
   export let num: number = 0;

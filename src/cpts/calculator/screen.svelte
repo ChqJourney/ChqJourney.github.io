@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { sound } from "../../pages/focus.svelte";
+    import { sound } from "../../App.svelte";
   import { readExistedRecords, validateAndPersistanceRecords } from "../../funcs/common";
   import { calculatorData, timeout } from "../../stores/calculatorStore";
 

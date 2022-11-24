@@ -1,31 +1,23 @@
-<script context="module" type="ts">
-  import { Howl, Howler } from "howler";
-  export const sound = new Howl({
-    src: ["effects.mp3"],
-    sprite: {
-      success: [316, 2100],
-      wrong: [2824, 1700],
-      correct: [6334, 1200],
-      timeout: [7686, 2100],
-      start: [10106, 2050],
-    },
-  });
-
-</script>
-
 <script lang="ts">
   import Header from "../cpts/public/header.svelte";
   import RankList from "../cpts/public/rankList.svelte";
   import GameContainer from "../cpts/focus/gameContainer.svelte";
   import { focusData, setRecords } from "../stores/focusStore";
-  import { onMount } from "svelte";
-  import { readRecords } from "../funcs/common";
+  import { onMount, beforeUpdate, afterUpdate, onDestroy } from "svelte";
+  import { readRecords, validateAndPersistanceRecords } from "../funcs/common";
   import kelly from "../assets/kelly.png";
   import molly from "../assets/logo192.png";
-  
+  let records, user;
+  const sub = () =>
+    focusData.subscribe((val) => {
+      records = val.records;
+      user = val.user;
+    });
   onMount(() => {
-    setRecords(readRecords(3))
+    sub();
+    setRecords(readRecords(3));
   });
+  onDestroy(sub);
 </script>
 
 <svelte:head>
@@ -34,10 +26,7 @@
 <div
   class="w-full flex flex-col justify-between justify-items-start overflow-hidden h-full lg:w-[600px] md:mx-auto"
 >
-  <Header imgLeftPath={kelly} imgRightPath={molly} userName={$focusData.user} />
+  <Header imgLeftPath={kelly} imgRightPath={molly} userName={user} />
   <GameContainer />
-  <RankList records={$focusData.records} />
+  <RankList records={records} />
 </div>
-
-<style>
-</style>
