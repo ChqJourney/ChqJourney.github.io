@@ -16,6 +16,7 @@ const initState: {
   roundStatus:string;
   level: string;
   records: Rank[];
+  showModal:boolean
 } = {
   arr: initBlocks(9,10),
   showIdx: [],
@@ -28,6 +29,7 @@ const initState: {
   roundStatus:'idle',
   level: '简单',
   records: [],
+  showModal:false
 };
 export interface RememberTi {
   blocks: string

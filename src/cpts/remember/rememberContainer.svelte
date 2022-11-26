@@ -15,20 +15,22 @@
   import Blocks from "./blocks.svelte";
     import ErrorIndicator from "./ErrorIndicator.svelte";
     import { sleep } from '../../funcs/common';
+    import Modal from '../public/modal.svelte';
     $:opt='简单'
     
     const showTxt = { idle: "Start", running: "Stop", pending: "Resume",success:"done" };
   const startAction = async () => {
+    $rememberData.showModal=!$rememberData.showModal
     if($rememberData.status==='idle'){
-      switchGame();
-      initArr();
-      startShowTi();
-      await sleep(1000);
-      hideTi();
-      setRoundStatus("running");
+      // switchGame();
+      // initArr();
+      // startShowTi();
+      // await sleep(1000);
+      // hideTi();
+      // setRoundStatus("running");
     }else{
-      $rememberData.status='idle'
-      initArr()
+      // $rememberData.status='idle'
+      // initArr()
     }
   };
   const timeoutFuc = async () => {
@@ -79,4 +81,6 @@
     tis={$rememberData.arr[$rememberData.current - 1]}
    
   />
+
 </div>
+<Modal isShow={$rememberData.showModal}/>
