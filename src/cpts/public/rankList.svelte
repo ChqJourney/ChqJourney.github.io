@@ -4,7 +4,7 @@
     export let records:Rank[]=[]
     </script>
      
-<table class="table-auto hover:table-fixed rounded-lg">
+<table class="w-full table-auto hover:table-fixed rounded-lg">
     <thead>
         <tr class="border-b border-slate-500">
             <th class="">no</th>

@@ -60,7 +60,7 @@
   };
 </script>
 
-<div class="text-xs sm:text-lg">
+<div class="text-xs w-full sm:text-lg">
   <div class="flex justify-between items-center my-1 px-2">
     <LevelOpt ></LevelOpt>
     <button class="btnPrimary" on:click={startAction}>{showTxt[$rememberData.status]}</button>
