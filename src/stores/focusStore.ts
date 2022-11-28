@@ -2,7 +2,7 @@ import type { Rank } from '../models/focus';
 import { writable,derived } from 'svelte/store';
 import { createRandomArray } from '../funcs/common';
 
-const initState = { arr: new Array(3 * 3), dimension: 3, user: localStorage.getItem('user'), status: 'idle',timerStatus:'idle', roundTime: 30, leftTime: 30, records: [] }
+const initState = { arr: new Array(3 * 3), showModal:false, dimension: 3, user: localStorage.getItem('user'), status: 'idle',timerStatus:'idle', roundTime: 30, leftTime: 30, records: [] }
 export const focusData = writable(initState);
 
 export const createTis=()=>{
@@ -11,6 +11,12 @@ export const createTis=()=>{
             val.dimension * val.dimension
           );
           return val;
+    })
+}
+export const showModal=()=>{
+    focusData.update(val=>{
+        val.showModal=!val.showModal
+        return val
     })
 }
 

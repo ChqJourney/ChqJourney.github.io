@@ -24,7 +24,7 @@
   <title>Focus</title>
 </svelte:head>
 <div
-  class="w-full flex flex-col justify-between justify-items-start overflow-hidden h-full lg:w-[600px] md:mx-auto"
+  class="w-full flex flex-col justify-between items-center justify-items-start overflow-hidden h-full lg:w-[600px] md:mx-auto"
 >
   <Header imgLeftPath={kelly} imgRightPath={molly} userName={user} />
   <GameContainer />

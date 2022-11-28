@@ -5,6 +5,7 @@
     setRecords,
     setStatus,
     setTimer,
+    showModal,
   } from "../../stores/focusStore";
   import {
     readRecords,
@@ -28,32 +29,33 @@
     success: "done",
   };
   const btnAction = () => {
-    switch (store.status) {
-      case "idle":
-        createTis();
-        sound.play("start");
-        setTimeout(() => {
-          setStatus("running");
-          setTimer("running");
-        }, 1000);
+    showModal()
+    // switch (store.status) {
+    //   case "idle":
+    //     createTis();
+    //     sound.play("start");
+    //     setTimeout(() => {
+    //       setStatus("running");
+    //       setTimer("running");
+    //     }, 1000);
 
-        break;
-      case "running":
+    //     break;
+    //   case "running":
        
-        setTimer("pending");
-        let confirm=window.confirm('if stop game?')
-      if(confirm){
+    //     setTimer("pending");
+    //     let confirm=window.confirm('if stop game?')
+    //   if(confirm){
 
-        setTimer('reset')
-        setStatus("idle");
-      }else{
-        setTimer('running')
-      }
-        break;
-      case "pending":
-        setStatus("running");
-        break;
-    }
+    //     setTimer('reset')
+    //     setStatus("idle");
+    //   }else{
+    //     setTimer('running')
+    //   }
+    //     break;
+    //   case "pending":
+    //     setStatus("running");
+    //     break;
+    // }
   };
   
   const onStop = (e: any) => {
@@ -85,7 +87,7 @@
   };
 </script>
 
-<div class="h-10 sm:h-12">
+<div class="h-10 sm:h-12 w-full">
   <PaTimer
     operation={store.timerStatus}
     interval={100}

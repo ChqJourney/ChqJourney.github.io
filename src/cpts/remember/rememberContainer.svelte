@@ -16,6 +16,7 @@
     import ErrorIndicator from "./ErrorIndicator.svelte";
     import { sleep } from '../../funcs/common';
     import Modal from '../public/modal.svelte';
+    import ConfirmModal from '../public/confirmModal.svelte';
     $:opt='简单'
     
     const showTxt = { idle: "Start", running: "Stop", pending: "Resume",success:"done" };
@@ -83,4 +84,6 @@
   />
 
 </div>
-<Modal isShow={$rememberData.showModal}/>
+<Modal isShow={$rememberData.showModal}>
+  <ConfirmModal title={"Confirm"} content={"Go ahead to next?"}/>
+</Modal>
