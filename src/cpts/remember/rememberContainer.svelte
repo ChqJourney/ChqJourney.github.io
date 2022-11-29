@@ -9,6 +9,7 @@
     switchGame,
     startShowTi,
     triggerNextAction,
+    switchModal,
   } from "../../stores/rememberStore";
   import Counter from "../public/counter.svelte";
   import Timer from "../public/timer.svelte";
@@ -21,19 +22,27 @@
     
     const showTxt = { idle: "Start", running: "Stop", pending: "Resume",success:"done" };
   const startAction = async () => {
-    $rememberData.showModal=!$rememberData.showModal
     if($rememberData.status==='idle'){
-      // switchGame();
-      // initArr();
-      // startShowTi();
-      // await sleep(1000);
-      // hideTi();
-      // setRoundStatus("running");
+      switchGame();
+      initArr();
+      startShowTi();
+      await sleep(1000);
+      hideTi();
+      setRoundStatus("running");
     }else{
-      // $rememberData.status='idle'
-      // initArr()
+      $rememberData.status='idle'
+      initArr()
     }
   };
+  const onConfirmed=async()=>{
+    switchModal()
+    await sleep(1000)
+    setRoundStatus("running");
+    triggerNextAction();
+    startShowTi();
+    await sleep(1000);
+    hideTi();
+  }
   const timeoutFuc = async () => {
     setRoundStatus("fail");
     recordTiResult(false);
@@ -48,16 +57,16 @@
     setRoundStatus("running");
   };
   const successFuc = async () => {
+    
     setRoundStatus("idle");
     await sleep(1000)
     recordTiResult(true);
     hideTi()
     await sleep(1000);
-    setRoundStatus("running");
-    triggerNextAction();
-    startShowTi();
-    await sleep(1000);
-    hideTi();
+    if($rememberData.current!==$rememberData.total){
+      switchModal()
+    }
+    
   };
 </script>
 
@@ -84,6 +93,6 @@
   />
 
 </div>
-<Modal isShow={$rememberData.showModal}>
-  <ConfirmModal title={"Confirm"} content={"Go ahead to next?"}/>
+<Modal isShow={$rememberData.isShowModal} on:onClosed={()=>switchModal()}>
+  <ConfirmModal title={"Confirm"} content={"Go ahead to next?"} on:confirm={onConfirmed}/>
 </Modal>

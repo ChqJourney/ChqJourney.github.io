@@ -16,7 +16,7 @@ const initState: {
   roundStatus:string;
   level: string;
   records: Rank[];
-  showModal:boolean
+  isShowModal:boolean
 } = {
   arr: initBlocks(9,10),
   showIdx: [],
@@ -29,7 +29,7 @@ const initState: {
   roundStatus:'idle',
   level: '简单',
   records: [],
-  showModal:false
+  isShowModal:false
 };
 export interface RememberTi {
   blocks: string
@@ -47,6 +47,9 @@ export const switchGame = () => {
     return val
   }
   )
+}
+export const switchModal=()=>{
+    rememberData.update(val=>{val.isShowModal=!val.isShowModal;return val;})
 }
 export const initArr = () => {
   rememberData.update(val => {
