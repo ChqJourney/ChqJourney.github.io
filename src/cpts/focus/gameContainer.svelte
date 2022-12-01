@@ -2,7 +2,7 @@
 <script lang="ts">
 import {beforeUpdate,} from 'svelte'
 import { focusData} from "../../stores/focusStore";
-    import Modal from '../public/modal.svelte';
+    import Modal from '../public/modal/modalContainer.svelte';
 import Blocks from "./blocks.svelte";
 import Panel from "./panel.svelte";
 

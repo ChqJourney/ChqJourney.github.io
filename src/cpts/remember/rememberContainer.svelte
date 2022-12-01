@@ -16,8 +16,9 @@
   import Blocks from "./blocks.svelte";
     import ErrorIndicator from "./ErrorIndicator.svelte";
     import { sleep } from '../../funcs/common';
-    import Modal from '../public/modal.svelte';
-    import ConfirmModal from '../public/confirmModal.svelte';
+    import Modal from '../public/modal/modalContainer.svelte';
+    import ConfirmModal from '../public/modal/confirm.svelte';
+    import InfoModal from '../public/modal/info.svelte'
     $:opt='简单'
     
     const showTxt = { idle: "Start", running: "Stop", pending: "Resume",success:"done" };
@@ -89,7 +90,6 @@
   </div>
   <Blocks
     tis={$rememberData.arr[$rememberData.current - 1]}
-   
   />
 
 </div>

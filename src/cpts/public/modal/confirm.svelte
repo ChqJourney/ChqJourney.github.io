@@ -8,15 +8,15 @@ export let content:string
 const dispatch=createEventDispatcher()
 
 const cancelFunc=()=>{
-    dispatch('cancel')
+    dispatch('onNegative',false)
 }
 const confirmFunc=()=>{
-    dispatch('confirm')
+    dispatch('onPositive',true)
 }
 </script>
 
+<div class="absolute top-0 text-center text-sm font-bold">{title}</div>
 <div>
-    <div class="text-center text-sm font-bold">{title}</div>
     <div class="text-center text-xs">{content}</div>
     <div class="flex gap-2 mt-2">
         <button class="border rounded-md text-xs px-1 border-orange-300 hover:bg-slate-400 hover:text-black" on:click={cancelFunc}>Cancel</button>

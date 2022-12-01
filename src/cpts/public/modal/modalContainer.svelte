@@ -5,7 +5,7 @@
 
 	const dispatch = createEventDispatcher();
     $:show=isShow
-
+    console.log(show)
 
 </script>
 
