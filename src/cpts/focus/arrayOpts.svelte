@@ -23,7 +23,7 @@
 <select
     title="dimension"
     on:change={onSelection}
-    class="w-16 text-sm sm:text-xl sm:h-10 sm:w-24 rounded-sm mx-1"
+    class="w-16 border border-yellow-500 text-emerald-500 rounded-sm text-center h-8"
 >
     <option value="3">3 x 3</option>
     <option value="4">4 x 4</option>
@@ -31,11 +31,5 @@
 </select>
 
 <style>
-    select {
-        text-align: center;
-        border: 1px solid lightblue;
-    }
-    select:hover {
-        border: 1px solid lightcoral;
-    }
+    
 </style>

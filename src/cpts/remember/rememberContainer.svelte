@@ -44,18 +44,21 @@
     await sleep(1000);
     hideTi();
   }
+  const onCancel=async()=>{
+    switchModal()
+    $rememberData.status='idle'
+      initArr()
+  }
   const timeoutFuc = async () => {
     setRoundStatus("fail");
     recordTiResult(false);
     startShowTi();
     await sleep(1000);
     hideTi();
-    await sleep(2000);
-    triggerNextAction();
-    startShowTi();
     await sleep(1000);
-    hideTi();
-    setRoundStatus("running");
+    if($rememberData.current!==$rememberData.total){
+      switchModal()
+    }
   };
   const successFuc = async () => {
     
@@ -74,14 +77,14 @@
 <div class="text-xs w-full sm:text-lg">
   <div class="flex justify-between items-center my-1 px-2">
     <LevelOpt ></LevelOpt>
-    <button class="btnPrimary" on:click={startAction}>{showTxt[$rememberData.status]}</button>
+    <button class="btnPrimary h-8" on:click={startAction}>{showTxt[$rememberData.status]}</button>
   </div>
   <div class="flex justify-between items-center my-1 px-2">
    <ErrorIndicator />
     <Counter total={$rememberData.total} idx={$rememberData.current} />
     
     <Timer
-      duration={5}
+      duration={$rememberData.roundTime}
       operation={$rememberData.roundStatus}
       on:success={successFuc}
       on:timeout={timeoutFuc}
@@ -94,5 +97,5 @@
 
 </div>
 <Modal isShow={$rememberData.isShowModal} on:onClosed={()=>switchModal()}>
-  <ConfirmModal title={"Confirm"} content={"Go ahead to next?"} on:confirm={onConfirmed}/>
+  <ConfirmModal title={"Confirm"} content={"Go ahead to next?"} on:onPositive={onConfirmed} on:onNegative={onCancel}/>
 </Modal>

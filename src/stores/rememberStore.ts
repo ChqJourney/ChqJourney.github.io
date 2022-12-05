@@ -14,6 +14,7 @@ const initState: {
   user: string;
   status: string;
   roundStatus:string;
+  roundTime:number
   level: string;
   records: Rank[];
   isShowModal:boolean
@@ -27,6 +28,7 @@ const initState: {
   user: localStorage.getItem("user")??"friend",
   status: "idle",
   roundStatus:'idle',
+  roundTime:5,
   level: '简单',
   records: [],
   isShowModal:false
@@ -103,16 +105,19 @@ export const setValue=(opt:string)=>{
       case "简单":
         val.dimension=3
         val.quantity=4
+        val.roundTime=5
         val.arr=initBlocks(9,val.total)
       break;
       case "普通":
         val.dimension=4
         val.quantity=6
+        val.roundTime=10
         val.arr=initBlocks(16,val.total)
         break;
         case "困难":
           val.dimension=5
           val.quantity=8
+          val.roundTime=15
           val.arr=initBlocks(25,val.total)
         break;
     }

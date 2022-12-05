@@ -4,7 +4,6 @@
 
  const setLevel=(e)=>{
   setValue(e.target.value)
-  console.log($rememberData.dimension)
  }
 </script>
 

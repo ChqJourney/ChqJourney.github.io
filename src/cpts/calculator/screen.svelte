@@ -31,13 +31,13 @@
   };
 </script>
 
-<div class="w-full lg:w-[500px] h-full bg-sky-600 pb-2 pt-2">
+<div class="w-full bg-sky-600 pb-2 pt-2">
   <div
     class=" h-full flex justify-center items-center bg-sky-800 mx-2 rounded-lg py-4 relative"
   >
-    <div class="absolute left-2 top-1 text-lg font-bold text-orange-600">
+    <div class="absolute left-2 top-1 text-lg md:text-xl lg:text-2xl font-bold text-orange-600">
       <div class="w-14 h-full">
-        <Timer
+        <Timer 
           noBoard={true}
           on:timeout={timeoutAction}
           on:success={successAction}
@@ -70,7 +70,7 @@
 
       <DisplayUnit content={$calculatorData.input} />
     {:else}
-      <div class="h-12 sm:h-24 text-xs flex items-center sm:text-xl text-white">
+      <div class="h-12 sm:h-24 text-xs flex items-center sm:text-xl md:text-2xl lg:text-3xl  text-white">
         {$calculatorData.user ?? "hi friend"}，按开始键游戏......
       </div>
     {/if}

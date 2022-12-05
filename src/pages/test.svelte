@@ -35,7 +35,7 @@
             }
         }}>change modal</button
     >
-    <ModalContainer isShow={show}>
+    <ModalContainer isShow={show} >
         <svelte:component
             this={modals[slot]["component"]}
             title={modals[slot]["title"]}

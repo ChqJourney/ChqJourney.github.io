@@ -10,7 +10,7 @@ import Screen from "../cpts/calculator/screen.svelte";
 </script>
 
 
-<div class="container mx-auto h-full relative w-full lg:w-[500px] flex flex-col justify-between">
+<div class=" h-screen relative w-full flex md:mx-auto md:container md:w-[800px] lg:w-[1024px] flex-col justify-center">
     <Header imgLeftPath={kelly} imgRightPath={molly} userName={$calculatorData.user}/>
     <Screen/>
     <Keyboard />
