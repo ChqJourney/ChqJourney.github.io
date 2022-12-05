@@ -7,7 +7,7 @@ set -e
 yarn build
 
 # navigate into the build output directory
-cd dist
+cd docs
 
 # place .nojekyll to bypass Jekyll processing
 echo > .nojekyll
