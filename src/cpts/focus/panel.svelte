@@ -29,33 +29,31 @@
     success: "done",
   };
   const btnAction = () => {
-    showModal()
-    // switch (store.status) {
-    //   case "idle":
-    //     createTis();
-    //     sound.play("start");
-    //     setTimeout(() => {
-    //       setStatus("running");
-    //       setTimer("running");
-    //     }, 1000);
+    
+    switch (store.status) {
+      case "idle":
+        createTis();
+        sound.play("start");
+        setTimeout(() => {
+          setStatus("running");
+          setTimer("running");
+        }, 1000);
 
-    //     break;
-    //   case "running":
-       
-    //     setTimer("pending");
-    //     let confirm=window.confirm('if stop game?')
-    //   if(confirm){
-
-    //     setTimer('reset')
-    //     setStatus("idle");
-    //   }else{
-    //     setTimer('running')
-    //   }
-    //     break;
-    //   case "pending":
-    //     setStatus("running");
-    //     break;
-    // }
+        break;
+      case "running":
+        setTimer("pending");
+        let confirm=window.confirm('if stop game?')
+      if(confirm){
+        setTimer('reset')
+        setStatus("idle");
+      }else{
+        setTimer('running')
+      }
+        break;
+      case "pending":
+        setStatus("running");
+        break;
+    }
   };
   
   const onStop = (e: any) => {
