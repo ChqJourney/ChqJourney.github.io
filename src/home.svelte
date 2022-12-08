@@ -19,7 +19,7 @@
             </button>
         </div> 
     </div>
-    <div class="flex flex-col justify-center items-center space-y-2">
+    <div class="flex flex-col justify-center items-center space-y-2 mb-64">
 
         <a href="/focus" class="w-36 h-24 rounded-md bg-orange-500 flex-col text-center flex items-center justify-center">
             Focus
